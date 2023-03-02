@@ -37,6 +37,7 @@ const PointConnector = ({
 
       let lines = document.createElement("div");
       lines.className = connectorClassName;
+      (positionType === "absolute" ? document.body : currentPoint).appendChild(lines);
 
       if (animate) {
         lines.style.width = "0";
@@ -53,7 +54,6 @@ const PointConnector = ({
       lines.style.borderTopColor = currentPoint.style.backgroundColor;
 
       if (positionType === "absolute") {
-        document.body.appendChild(lines);
         lines.style.zIndex = zindex;
         lines.style.position = "absolute";
         lines.style.left =
@@ -70,7 +70,6 @@ const PointConnector = ({
           currentBoundingRect.height / 2 +
           "px";
       } else if (positionType === "relative") {
-        currentPoint.appendChild(lines);
         lines.style.position = "relative";
         lines.style.marginLeft = `${currentBoundingRect.width / 2 - 1}px`;
         lines.style.marginTop = `${currentBoundingRect.height / 2 - 1}px`;
