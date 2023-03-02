@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+  <script src="../dist/point-connector.min.js"></script>
+  <style>
+      .point-group {
+          border-collapse: collapse;
+      }
+
+      .point {
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          text-align: center;
+          line-height: 20px;
+          color: white;
+          font-size: 12px;
+      }
+
+      .connector {
+          opacity: 0;
+      }
+  </style>
+  <title>Randomized Example</title>
+</head>
+<body>
+<div class="point-group"></div>
+<script>
+  var pointGroup = document.querySelector(".point-group");
+  for (var k = 0; k < 3; k++) {
+    for (var i = 0; i < 15; i++) {
+      var newPoint = document.createElement("div");
+      newPoint.className = "point";
+      newPoint.setAttribute("data-point-type", ["speed", "acceleration", "control"][k]);
+      newPoint.style.backgroundColor = ["red", "green", "blue"][k];
+      newPoint.style.left = Math.floor(Math.random() * window.innerWidth) + "px";
+      newPoint.style.top = Math.floor(Math.random() * window.innerHeight) + "px";
+      newPoint.innerHTML = i;
+      pointGroup.append(newPoint);
+    }
+  }
+
+  PointConnector({
+    groupSelector: ".point-group",
+    connectorStyle: ["solid", "dashed", "dotted"][Math.floor(Math.random() * 3)],
+    lineHeight: Math.floor(Math.random() * 15) + 1,
+    animationDuration: Math.floor(Math.random() * 2) + 0.1,
+    animationEasing: ["ease", "ease-in", "ease-out", "ease-in-out", "linear"][Math.floor(Math.random() * 5)],
+    animationType: ["width", "opacity"][Math.floor(Math.random() * 2)]
+  }).initialize();
+</script>
+</body>
